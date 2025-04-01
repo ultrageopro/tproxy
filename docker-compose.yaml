@@ -1,24 +1,11 @@
 services:
-  telegram-proxy:
-      image: telegrammessenger/proxy:latest
-      container_name: tg-proxy
-      ports:
-        - "443:443"
-      volumes:
-        - "proxy-config:/data"
-      restart: unless-stopped
-      environment:
-        - SECRET=${SECRET}
-        - SECRET_COUNT=${SECRET_COUNT}
-        - WORKERS=${WORKERS}
-  tg-proxy-watchtower:
-    image: v2tec/watchtower
-    container_name: tg-proxy-watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /root/.docker/config.json:/config.json
-    command: telegrammessenger/proxy:latest
-    restart: unless-stopped
-volumes:
-  proxy-config:
 
+  socks5:
+    restart: always
+    image: serjs/go-socks5-proxy
+    environment:
+      - PROXY_USER=ultrageopro
+      - PROXY_PASSWORD=${PROXY_PASSWORD}
+      - PROXY_PORT=443
+    ports:
+      - "443:443"
