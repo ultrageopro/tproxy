@@ -8,7 +8,6 @@ services:
         - "proxy-config:/data"
       restart: unless-stopped
       environment:
-        - TAG=${TAG}
         - SECRET=${SECRET}
         - SECRET_COUNT=${SECRET_COUNT}
         - WORKERS=${WORKERS}
@@ -22,3 +21,4 @@ services:
     restart: unless-stopped
 volumes:
   proxy-config:
+
